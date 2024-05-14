@@ -59,8 +59,8 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: artifacts
-        pattern: ConvertEINK-*
-        merge-multiple: true
+        #pattern: ConvertEINK-*
+       # merge-multiple: true
 #    - name: Zip Linux
  #     working-directory: bin/Release/net8.0/linux-x64/publish
   #    run: zip -qq -r ../../../../../release_linux.zip .
