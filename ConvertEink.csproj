@@ -14,4 +14,7 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
   </ItemGroup>
 
+<ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+   <PackageReference Include="GtkSharp.Dependencies" Version="1.1.1" />
+</ItemGroup>
 </Project>
