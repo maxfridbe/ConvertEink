@@ -55,16 +55,24 @@ jobs:
       id: tag
       run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
-#    - name: Zip Linux win-x64
- #     run: zip release_linux.zip bin/Release/net8.0/linux-x64/publish
-    - uses: montudor/action-zip@v1
-      with:
-           args: zip -qq -r release_linux.zip bin/Release/net8.0/linux-x64/publish
+    - name: Zip Linux
+      working-directory: bin/Release/net8.0/linux-x64/publish
+      run: zip -qq -r release_linux.zip .
+    - name: Zip win-x64
+      working-directory: bin/Release/net8.0/win-x64/publish
+      run: zip -qq -r release_windows_x64.zip .
+    - name: Zip osx-arm64
+      working-directory: bin/Release/net8.0/osx-arm64/publish
+      run: zip -qq -r release_osx-arm64.zip .
+   # - uses: montudor/action-zip@v1
+     
+    #  with:
+     #      args: zip -qq -j -r release_linux.zip .
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
           #name: ConvertEINK-osx-arm64
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: "release_linux.zip"
+          files: "release_**.zip"
       env:
           GITHUB_TOKEN: ${{ github.token }}
