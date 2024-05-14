@@ -61,15 +61,15 @@ jobs:
         path: artifacts
         #pattern: ConvertEINK-*
        # merge-multiple: true
-#    - name: Zip Linux
- #     working-directory: bin/Release/net8.0/linux-x64/publish
-  #    run: zip -qq -r ../../../../../release_linux.zip .
-   # - name: Zip win-x64
-   #   working-directory: bin/Release/net8.0/win-x64/publish
-    #  run: zip -qq -r ../../../../../release_windows_x64.zip .
-  #  - name: Zip osx-arm64
-   #   working-directory: bin/Release/net8.0/osx-arm64/publish
-   #   run: zip -qq -r ../../../../../artifacts/release_osx-arm64.zip .
+    - name: Zip Linux
+      working-directory: bin/Release/net8.0/linux-x64/publish
+      run: zip -qq -r release_linux.zip .
+    - name: Zip win-x64
+      working-directory: bin/Release/net8.0/win-x64/publish
+      run: zip -qq -r release_windows_x64.zip .
+    - name: Zip osx-arm64
+      working-directory: bin/Release/net8.0/osx-arm64/publish
+      run: zip -qq -r release_osx-arm64.zip .
    # - uses: montudor/action-zip@v1
      
     #  with:
@@ -77,8 +77,7 @@ jobs:
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-          #name: ConvertEINK-osx-arm64
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: "artifacts/*"
+          files: "${{ github.workspace }}/**/release_*"
       env:
           GITHUB_TOKEN: ${{ github.token }}
