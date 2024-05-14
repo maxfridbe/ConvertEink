@@ -6,8 +6,6 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-    tags:
-    - '*'
   pull_request:
     branches: [ "main" ]
     
@@ -52,9 +50,14 @@ jobs:
           name: ConvertEINK-osx-arm64
           path: |
             bin/Release/net8.0/osx-arm64/publish
+    - name: Generate release tag
+      id: tag
+      run: |
+          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: "ConvertEINK-*"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
