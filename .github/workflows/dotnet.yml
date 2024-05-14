@@ -55,15 +55,19 @@ jobs:
       id: tag
       run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
-    - name: Zip Linux
-      working-directory: bin/Release/net8.0/linux-x64/publish
-      run: zip -qq -r ../../../../../release_linux.zip .
-    - name: Zip win-x64
-      working-directory: bin/Release/net8.0/win-x64/publish
-      run: zip -qq -r ../../../../../release_windows_x64.zip .
-    - name: Zip osx-arm64
-      working-directory: bin/Release/net8.0/osx-arm64/publish
-      run: zip -qq -r ../../../../../artifacts/release_osx-arm64.zip .
+    - name: ↙️ download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts
+#    - name: Zip Linux
+ #     working-directory: bin/Release/net8.0/linux-x64/publish
+  #    run: zip -qq -r ../../../../../release_linux.zip .
+   # - name: Zip win-x64
+   #   working-directory: bin/Release/net8.0/win-x64/publish
+    #  run: zip -qq -r ../../../../../release_windows_x64.zip .
+  #  - name: Zip osx-arm64
+   #   working-directory: bin/Release/net8.0/osx-arm64/publish
+   #   run: zip -qq -r ../../../../../artifacts/release_osx-arm64.zip .
    # - uses: montudor/action-zip@v1
      
     #  with:
