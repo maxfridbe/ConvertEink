@@ -58,7 +58,8 @@ jobs:
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
+          name: ConvertEINK-osx-arm64
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: "ConvertEINK-*"
+          #files: "ConvertEINK-*"
       env:
           GITHUB_TOKEN: ${{ github.token }}
