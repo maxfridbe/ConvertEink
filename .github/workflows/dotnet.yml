@@ -57,13 +57,13 @@ jobs:
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
     - name: Zip Linux
       working-directory: bin/Release/net8.0/linux-x64/publish
-      run: zip -qq -r release_linux.zip .
+      run: zip -qq -r ../../../../../release_linux.zip .
     - name: Zip win-x64
       working-directory: bin/Release/net8.0/win-x64/publish
-      run: zip -qq -r release_windows_x64.zip .
+      run: zip -qq -r ../../../../../release_windows_x64.zip .
     - name: Zip osx-arm64
       working-directory: bin/Release/net8.0/osx-arm64/publish
-      run: zip -qq -r release_osx-arm64.zip .
+      run: zip -qq -r ../../../../../artifacts/release_osx-arm64.zip .
    # - uses: montudor/action-zip@v1
      
     #  with:
@@ -73,6 +73,6 @@ jobs:
       with:
           #name: ConvertEINK-osx-arm64
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: "release_**.zip"
+          files: "artifacts/*"
       env:
           GITHUB_TOKEN: ${{ github.token }}
