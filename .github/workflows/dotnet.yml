@@ -50,3 +50,9 @@ jobs:
           name: ConvertEINK-osx-arm64
           path: |
             bin/Release/net8.0/osx-arm64/publish
+    - name: Publish
+      uses: softprops/action-gh-release@v1
+      with:
+          files: "ConvertEINK-*"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
