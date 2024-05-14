@@ -24,13 +24,29 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Publish
+    - name: Publish Linux
       run: dotnet publish --self-contained
-    #- name: Zip Linux
+    - name: Publish Windows
+      run: dotnet publish -r win-x64 --self-contained
+    - name: Publish Mac
+      run: dotnet publish -r osx-arm64 --self-contained
+    #- name: Zip Linux win-x64
       #run: zip release_linux.zip bin/Release/net8.0/linux-x64/publish
-    - name: Archive production artifacts
+    - name: Archive production artifacts linux
       uses: actions/upload-artifact@v4
       with:
-          name: release-linux
+          name: ConvertEINK-linux
           path: |
             bin/Release/net8.0/linux-x64/publish
+    - name: Archive production artifacts windows
+      uses: actions/upload-artifact@v4
+      with:
+          name: ConvertEINK-win64
+          path: |
+            bin/Release/net8.0/win-x64/publish
+    - name: Archive production artifacts mac_arm
+      uses: actions/upload-artifact@v4
+      with:
+          name: ConvertEINK-osx-arm64
+          path: |
+            bin/Release/net8.0/osx-arm64/publish
